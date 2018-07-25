@@ -1,0 +1,201 @@
+<div class="espacio">
+  <div *ngIf="(ErrorMessage != null || ErrorMessage != undefined )" class="alert alert-danger" id="danger">
+    <strong>{{ErrorMessage}}</strong>
+  </div>
+  <div *ngIf="anadeNota != null" class=" alert alert-success">
+    {{anadeNota}}
+  </div>
+</div>
+
+<div class="container">
+
+  <h2>Evaluaciones anteriores</h2>
+  <div [ngClass]="('' + (!Mostrar ? 'disabled' : ''))">
+    <div class="row">
+      <div class="panel panel-primary filterable todo">
+        <div class="panel-heading todo">
+          <div class="loading" *ngIf="!Mostrar">
+            <app-loading></app-loading>
+          </div>
+          <div class="pull-right">
+            <button class="btn btn-default btn-xs btn-filter" *ngIf="Mostrar" (click)="Restablecer()">Filtros</button>
+
+            <label class="radio" *ngIf="clicked" (click)="ChangeFiltro(null)">
+              <input name="radio" type="radio" checked>
+              <span>Todas</span>
+            </label>
+
+            <label class="radio" *ngIf="clicked" (click)="ChangeFiltro(true)">
+              <input name="radio" type="radio">
+              <span>Completada</span>
+            </label>
+
+            <label class="radio" *ngIf="clicked" (click)="ChangeFiltro(false)">
+              <input name="radio" type="radio">
+              <span>No Completada</span>
+            </label>
+
+            <button type="button" class="btn btn-info float-right inicio" *ngIf="Mostrar" (click)="VolverInicio()">Volver</button>
+
+          </div>
+        </div>
+        <table class="table todo">
+          <thead>
+            <tr class="filters text-center">
+              <th>
+                <div class="input-group input-group-sm" *ngIf="clicked">
+
+                  <input type="text" class="form-control filtro fecha" placeholder="Fecha" [(ngModel)]="EvaluacionFiltrar.fecha">
+
+                  <input class="form-control form-control-sm filtro" placeholder="YYYY-MM-DD" type="hidden"
+                         name="dp" ngbDatepicker #dF="ngbDatepicker" id="fromDate" [(ngModel)]="fechaPicker" (ngModelChange)="changeDate()">
+
+                  <div class="input-group-append">
+
+                    <button class="btn btn-outline-secondary" *ngIf="EvaluacionFiltrar.fecha.length > 0" (click)="limpiar()" type="button">
+                      <img src="assets/delete.png" style="width: 1rem; height: 1rem; cursor: pointer;" />
+                    </button>
+
+                    <button class="btn btn-outline-secondary" (click)="dF.toggle()" type="button">
+                      <img src="assets/calendar.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                    </button>
+
+
+                  </div>
+                </div>
+
+                <span *ngIf="!clicked">Fecha</span>
+              </th>
+              <th>
+                <span *ngIf="!clicked || this.Project.fecha != null">Proyecto</span>
+
+                <div *ngIf="ListaDeProyectos.length == 0 && clicked" id="cargarPDF">
+                  <app-loading></app-loading>
+                  <div id="ocultar"></div>
+                </div>
+
+                <select class="custom-select form-control form-control-sm" *ngIf="ListaDeProyectos.length > 0 && clicked && this.Project.fecha == null" (change)="SeleccionDeProyecto($event.target.value)">
+                  <option selected>- Seleccione un proyecto </option>
+                  <option *ngFor="let proyecto of ListaDeProyectos; let i = index" value={{i}}>{{proyecto.nombre}}</option>
+                </select>
+
+              </th>
+              <th>
+                <span *ngIf="!clicked">Usuario</span>
+                <input type="text" class="form-control form-control-sm filtro" placeholder="Usuario" *ngIf="clicked" (ngModelChange)="TryHttpRequest(true)" [(ngModel)]="EvaluacionFiltrar.userNombre">
+              </th>
+              <th>
+                <span>Puntuación</span>
+              </th>
+              <th>
+                <span>Estado</span>
+              </th>
+              <th>
+                <span>Notas Evaluacion</span>
+              </th>
+              <th>
+                <span>Notas Objetivos</span>
+              </th>
+              <th>
+                <span>Informe</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let evaluacion of ListaDeEvaluacionesPaginada; let i = index">
+              <td>{{evaluacion.fecha | date:'dd/MM/yyyy, HH:mm'}}</td>
+              <td>{{evaluacion.nombre}}</td>
+              <td>{{evaluacion.userNombre}}</td>
+              <td>{{evaluacion.puntuacion}}%</td>
+              <td *ngIf="evaluacion.estado">Completada</td>
+              <td *ngIf="!evaluacion.estado">No completada</td>
+              <td>
+                <button class="transparente" (click)="AbrirModal(notasEv, i, 0)">
+                  <img *ngIf="evaluacion.notasEv != null" src="assets/nota_si.png" title="Añadir notas" />
+                  <img *ngIf="evaluacion.notasEv == null" src="assets/nota_no.png" title="Añadir notas" />
+                </button>
+              </td>
+
+              <td>
+                <button class="transparente" (click)="AbrirModal(notasOb, i, 1)">
+                  <img *ngIf="evaluacion.notasOb != null" src="assets/nota_si.png" title="Añadir notas" />
+                  <img *ngIf="evaluacion.notasOb == null" src="assets/nota_no.png" title="Añadir notas" />
+                </button>
+              </td>
+              <td><button type="button" class="btnpdf" (click)="SaveDataToPDF(evaluacion)">Ver</button></td>
+
+            </tr>
+            <tr *ngIf="Mostrar && ListaDeEvaluacionesPaginada.length == 0">
+              <td colspan="8">
+                <h2 class="Warning">
+                  No se encontraron datos.
+                </h2>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+    <!--Grafica-->
+    <div id="Grafica" *ngIf="Mostrar && (this.Project.fecha != null || ProyectoSeleccionado) &&  ListaDeEvaluacionesPaginada.length != 0" class="mx-auto">
+      <canvas *ngIf="barChartData" id="canvas" baseChart #chart
+              [datasets]="barChartData"
+              [labels]="ListaNombres"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+              [colors]="chartColors"></canvas>
+    </div>
+
+
+    <div class="wrapper" *ngIf="NumMax > 1">
+      <button type="button" class="btn btn-success cambiar" (click)="NextPreviousButton(false)">Anterior</button>
+      <strong>
+        {{PageNow}}/{{NumMax}}
+      </strong>
+      <button type="button" class="btn btn-success cambiar" (click)="NextPreviousButton(true)">Siguiente</button>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+<ng-template #notasEv let-cl="close" let-di="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Notas Evaluación</h5> <button type="button" class="close" (click)="cl('Cerrar')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <textarea class="form-control" maxlength="4000" placeholder="Inserte aquí el texto" rows="10" [(ngModel)]="textoModal"></textarea>
+    </div>
+    <div class="modal-footer">
+      <p id="numletras" class="mr-2 mt-2">{{textoModal.length}}/4000</p>
+      <button type="button" class="btn btn-success cambiar" (click)="di('Guardar')">Guardar</button>
+      <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">Cancelar</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #notasOb let-cl="close" let-di="dismiss">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Notas Objetivos</h5> <button type="button" class="close" (click)="cl('Cerrar')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <textarea class="form-control" maxlength="4000" placeholder="Inserte aquí el texto" rows="10" [(ngModel)]="textoModal"></textarea>
+    </div>
+    <div class="modal-footer">
+      <p id="numletras" class="mr-2 mt-2">{{textoModal.length}}/4000</p>
+      <button type="button" class="btn btn-success cambiar" (click)="di('Guardar')">Guardar</button>
+      <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">Cancelar</button>
+    </div>
+  </div>
+</ng-template>

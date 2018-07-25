@@ -1,0 +1,18 @@
+--- INSTALACIÓN ---
+Con npm install debería instalarse todo lo necesario para Angular, si no, ir viendo qué errores da e ir instalando esos paquetes.
+Ejecutar el código de .NET en Visual Studio para que se creen las tablas en base de datos.
+Añadir trigger After Insert en tabla Evaluaciones, fichero Trigger.sql
+Lanzar ScriptBD.sql en la BD (para añdir preguntas, asignaciones, proyectos, etc.)
+
+
+
+--- DESARROLLO ---
+Actualmente el código de Angular está confiigurado manualmente para enviar peticiones a localhost al puerto 60406 (+ info en PRODUCCIÓN).
+Para iniciar Angular, usar ng serve y navegar a http://localhost:4200
+
+
+
+
+--- PRODUCCIÓN ---
+En todos los constructores de los ______Service.ts, comentar la parte de la url fija y descomentar la parte que permite la detección automática de url
+(hasta que se encuentre una solución mejor a esto).

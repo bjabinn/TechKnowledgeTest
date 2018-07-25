@@ -1,0 +1,159 @@
+
+<div class="corregir">
+  <div class="espacio">
+    <div *ngIf="(ErrorMessage != null || ErrorMessage != undefined )" class="alert alert-danger" id="danger">
+      <strong>{{ErrorMessage}}</strong>
+    </div>
+    <div *ngIf="anadeNota != null" class=" alert alert-success">
+      {{anadeNota}}
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="Deshabilitar">
+    <app-loading></app-loading>
+  </div>
+
+  <div [ngClass]="('' + (Deshabilitar ? 'disabled' : ''))" *ngIf="InfoAsignacion.preguntas !=  null">
+    <div class="row">
+      <div class="col-xs-12 col-sm-2 col-md-3"></div>
+      <div class="col-xs-12 col-sm-8 col-md-6 text-center">
+        <h2 class="d-inline">Sección: {{SectionSelected.nombre}}</h2>
+
+        <button class="transparente ml-4" (click)="AbrirModalSec(notasSec)">
+          <img *ngIf="SectionSelected.notas != null" height="40" src="assets/nota_si.png" title="Añadir notas" />
+          <img *ngIf="SectionSelected.notas == null" height="40" src="assets/nota_no.png" title="Añadir notas" />
+        </button>
+
+      </div>
+      <div class="col-xs-12 col-sm-2 col-md-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-2 col-md-3"></div>
+      <div class="col-xs-12 col-sm-8 col-md-6">
+        <h2>
+          Módulo {{InfoAsignacion.id}}: {{InfoAsignacion.nombre}}
+
+          <button class="transparente ml-4" (click)="AbrirModalAsig(notasAsset)">
+            <img *ngIf="InfoAsignacion.notas != null" height="40" src="assets/nota_si.png" title="Añadir notas" />
+            <img *ngIf="InfoAsignacion.notas == null" height="40" src="assets/nota_no.png" title="Añadir notas" />
+          </button>
+        </h2>
+
+      </div>
+
+      <div class="col-xs-12 col-sm-2 col-md-3"></div>
+    </div>
+    <br />
+    <div class="row" id="preguntas" *ngFor="let preguntaDada of InfoAsignacion.preguntas; let i = index">
+      <div class="col-xs-12 col-sm-2 col-md-2"></div>
+      <div class="col-xs-12 col-sm-5 col-md-5">
+        {{i + 1}}. {{preguntaDada.pregunta}}
+      </div>
+      <div class="col-xs-12 col-sm-2 col-md-2 col-lg-1 text-center" id="switch">
+
+        <div class="container" [ngClass]="{'disabled': InfoAsignacion.preguntas[0].correcta == null && InfoAsignacion.preguntas[0].respuesta.estado != 1 && i != 0}">
+          <div class="button-wrap">
+            <div class="onoffswitch">
+              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="{{preguntaDada.respuesta.id}}" (click)="ChangeEstadoDB(i)" [checked]="(preguntaDada.respuesta.estado == 1)">
+              <label class="onoffswitch-label" for="{{preguntaDada.respuesta.id}}">
+                <span [ngClass]="{'onoffswitch-inner-inactivo': preguntaDada.respuesta.estado == 0,
+                      'onoffswitch-inner': preguntaDada.respuesta.estado != 0}"></span>
+                <span [ngClass]="{'onoffswitch-switch-inactivo': preguntaDada.respuesta.estado == 0,
+                      'onoffswitch-switch': preguntaDada.respuesta.estado != 0}"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-xs-12 col-sm-1 col-md-1 col-lg-2 text-center pb-1">
+        <button *ngIf="preguntaDada.respuesta.notas != null && !(InfoAsignacion.preguntas[0].correcta == null && InfoAsignacion.preguntas[0].respuesta.estado != 1 && i != 0)" class="transparente" (click)="AbrirModalPreg(notasPreg, i)">
+          <img height="40" src="assets/nota_si.png" title="Añadir notas" />
+        </button>
+
+        <button *ngIf="preguntaDada.respuesta.notas == null && !(InfoAsignacion.preguntas[0].correcta == null && InfoAsignacion.preguntas[0].respuesta.estado != 1 && i != 0)" class="transparente" (click)="AbrirModalPreg(notasPreg, i)">
+          <img height="40" src="assets/nota_no.png" title="Añadir notas" />
+        </button>
+
+        <button *ngIf="preguntaDada.respuesta.notas != null && InfoAsignacion.preguntas[0].correcta == null && InfoAsignacion.preguntas[0].respuesta.estado != 1 && i != 0" class="transparente">
+          <img height="40" src="assets/nota_si.png" class="disabledButton" title="Añadir notas" />
+        </button>
+
+        <button *ngIf="preguntaDada.respuesta.notas == null && InfoAsignacion.preguntas[0].correcta == null && InfoAsignacion.preguntas[0].respuesta.estado != 1 && i != 0" class="transparente">
+          <img height="40" src="assets/nota_no.png" class="disabledButton" title="Añadir notas" />
+        </button>
+      </div>
+
+      <br />
+    </div>
+    <div class="wrapper" *ngIf="InfoAsignacion.preguntas != null && InfoAsignacion.preguntas.length != 0">
+      <button type="button" class="btn btn-outline-success" [ngClass]="{'disabled': PageNow == 1}" (click)="NextPreviousButton(2)">Anterior</button>
+      <strong>
+        {{PageNow}}/{{NumMax}}
+      </strong>
+      <button type="button" class="btn btn-outline-success" *ngIf="PageNow != NumMax" (click)="NextPreviousButton(1)">Siguiente</button>
+      <button type="button" class="btn btn-outline-success" *ngIf="PageNow == NumMax" (click)="NextPreviousButton(0)">Finalizar</button>
+    </div>
+    <div class="wrapper mt-2">
+      <button type="button" class="btn btn-info inicio" (click)="NextPreviousButton(0)">Volver</button>
+    </div>
+  </div>
+
+  <ng-template #notasPreg let-cl="close" let-di="dismiss">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Notas Pregunta</h5> <button type="button" class="close" (click)="cl('Cerrar')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control" maxlength="4000" placeholder="Inserte aquí el texto" rows="10" [(ngModel)]="textoModal"></textarea>
+      </div>
+      <div class="modal-footer">
+        <p id="numletras" class="mr-2 mt-2">{{textoModal.length}}/4000</p>
+        <button type="button" class="btn btn-success finalizar" (click)="di('Guardar')">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">Cancelar</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #notasAsset let-cl="close" let-di="dismiss">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Notas Asignación</h5> <button type="button" class="close" (click)="cl('Cerrar')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control" maxlength="4000" placeholder="Inserte aquí el texto" rows="10" [(ngModel)]="textoModal"></textarea>
+      </div>
+      <div class="modal-footer">
+        <p id="numletras" class="mr-2 mt-2">{{textoModal.length}}/4000</p>
+        <button type="button" class="btn btn-success finalizar" (click)="di('Guardar')">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">Cancelar</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #notasSec let-cl="close" let-di="dismiss">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Notas Sección</h5> <button type="button" class="close" (click)="cl('Cerrar')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control" maxlength="4000" placeholder="Inserte aquí el texto" rows="10" [(ngModel)]="textoModal"></textarea>
+      </div>
+      <div class="modal-footer">
+        <p id="numletras" class="mr-2 mt-2">{{textoModal.length}}/4000</p>
+        <button type="button" class="btn btn-success finalizar" (click)="di('Guardar')">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">Cancelar</button>
+      </div>
+    </div>
+  </ng-template>
+
+</div>
+<br />
+
+

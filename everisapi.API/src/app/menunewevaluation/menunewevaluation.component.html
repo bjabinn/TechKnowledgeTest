@@ -1,0 +1,104 @@
+<br />
+<div class="corregir">
+  <div class="espacio">
+    <div *ngIf="(ErrorMessage != null || ErrorMessage != undefined )" class="alert alert-danger" id="danger">
+      <strong>{{ErrorMessage}}</strong>
+    </div>
+    <div *ngIf="anadeNota != null" class=" alert alert-success">
+      {{anadeNota}}
+    </div>
+
+    <div *ngIf="cargar">
+      <app-loading></app-loading>
+    </div>
+  </div>
+
+  <div *ngIf="ListaDeDatos.length != 0">
+    <div class="row" *ngFor="let dato of ListaDeDatos; let i = index" id="bajar">
+      <div class="col-xs-12 col-sm-2 col-md-2">
+      </div>
+
+      <div class="col-xs-12 col-sm-1 col-md-1" id="barraespacio" *ngIf="ScreenWidth >= 576">
+        <img class="icon" *ngIf="dato.progreso!=100 && dato.progreso > 0" src="assets/green_no.png" title="No completado" alt="No completado">
+        <img class="icon" *ngIf="dato.progreso==100" src="assets/green_si.png" alt="Completado" title="Completado">
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3">
+
+        <button type="button" class="btn btn-outline-success btn-lg btn-block" id="infopro" (click)="RedirectToAsignaciones(dato)">
+          <strong>{{dato.nombre}}  </strong>
+          <span *ngIf="ScreenWidth <= 576">
+            <img class="icon" *ngIf="dato.progreso!=100 && dato.progreso > 0" src="assets/green_no.png" alt="No completado">
+            <img class="icon" *ngIf="dato.progreso==100" src="assets/green_si.png" alt="Completado">
+          </span>
+        </button>
+
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3" id="barraespacio">
+        <ngb-progressbar type="success" [value]="dato.progreso" *ngIf="dato.progreso==100">
+          <span class="progress-text">{{dato.progreso}}%</span>
+        </ngb-progressbar>
+
+        <ngb-progressbar type="warning" [value]="dato.progreso" *ngIf="dato.progreso!=100">
+          <span class="progress-text">{{dato.progreso}}%</span>
+        </ngb-progressbar>
+
+        <p class="mt-1 font-italic">Respondidas {{dato.contestadas}} de {{dato.preguntas}} </p>
+      </div>
+
+
+      <div class="col-xs-12 col-sm-3 col-md-3">
+        <button class="transparente mb-3 mt-3" (click)="AbrirModalNotas(notas, i)">
+          <img *ngIf="dato.notas != null" height="45" src="assets/nota_si.png" title="Añadir notas"/>
+          <img *ngIf="dato.notas == null" height="45" src="assets/nota_no.png" title="Añadir notas"/>
+        </button>
+      </div>
+
+    </div>
+    <br />
+    <div class="wrapper">
+      <button type="button" class="btn btn-success mr-1 finalizar" (click)="AbrirModal(content)">Finalizar</button>
+      <button type="button" class="btn btn-primary inicio" (click)="VolverInicio()">Ir a inicio</button>
+    </div>
+  </div>
+
+  <div *ngIf="ListaDeDatos.length == 0">
+    <app-loading></app-loading>
+  </div>
+
+  <ng-template #content let-cl="close" let-di="dismiss">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Advertencia</h5> <button type="button" class="close" (click)="cl('Cerrar')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Al finalizar el proyecto no lo podrá modificar o eliminar ¿está seguro de realizar esta acción?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success finalizar" (click)="di('Finish')">Finalizar</button>
+        <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">Cancelar</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #notas let-cl="close" let-di="dismiss">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Notas Pregunta</h5> <button type="button" class="close" (click)="cl('Cerrar')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control" maxlength="4000" placeholder="Inserte aquí el texto" rows="10" [(ngModel)]="textoModal"></textarea>
+      </div>
+      <div class="modal-footer">
+        <p id="numletras" class="mr-2 mt-2">{{textoModal.length}}/4000</p>
+        <button type="button" class="btn btn-success finalizar" (click)="di('Guardar')">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">Cancelar</button>
+      </div>
+    </div>
+  </ng-template>
+</div>

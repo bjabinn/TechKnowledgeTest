@@ -1,0 +1,487 @@
+@media print {
+  #no-print, #no-print * {
+    display: none !important;
+  }
+  .no-print, .no-print * {
+    display: none !important;
+  }
+}
+
+#Grafica {
+  min-width: 350px;
+  max-width: 350px;
+}
+
+//Data
+.data {
+  text-align: center;
+  font-size: 13px;
+}
+
+.media {
+  font-size: 13px !important;
+}
+
+//Button
+
+.center {
+  text-align: center;
+}
+
+//Table design
+
+.table-fill {
+  background: white;
+  border-radius: 3px;
+  border-collapse: collapse;
+  max-width: 600px;
+  padding: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  font-size: 13px!important;
+}
+
+th {
+  background: rgba(145,188,4,0.36);
+  font-size: 13px;
+  padding: 13px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+th:first-child {
+  border-top-left-radius: 3px;
+}
+
+th:last-child {
+  border-top-right-radius: 3px;
+}
+
+tr:hover td {
+  transition: background 0.1s ease;
+  background: #4bedb4;
+}
+
+tr:nth-child(odd) td {
+  background-color: #EBEBEB;
+}
+
+tr:nth-child(odd):hover td {
+  background: #4bedb4;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius: 3px;
+}
+
+tr:last-child td:last-child {
+  border-bottom-right-radius: 3px;
+}
+
+td {
+  background: #FFFFFF;
+  padding: 10px;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+td.notasPreg{
+  font-size: 13px;
+  width:100px!important;
+}
+
+
+
+.total{
+  border-top: 1px solid black!important;
+}
+
+td, p {
+  white-space: pre-line;
+}
+
+p{
+  font-size: 13px!important;
+}
+
+h4 {
+  font-size: 16px !important;
+  background-color: rgba(145,188,4,0.36);
+  padding: 10px;
+}
+
+h5 {
+  font-size: 15px !important;
+  background-color: #EBEBEB;
+  padding: 10px;
+}
+
+.exp {
+  display: table; // to center the item
+  width: 100%;
+  height: 100%;
+
+  .checkbox {
+    display: table-cell; // to center the item
+    width: 100%;
+    height: 100%;
+    vertical-align: middle; // to center the item
+    text-align: center; // to center the item
+  }
+}
+
+label {
+  display: inline-block; // to make it easier to click
+  color: #000;
+  cursor: pointer;
+  position: relative; // important
+  // Now we'll create the checkbox object
+  span {
+    display: inline-block;
+    position: relative;
+    background-color: transparent;
+    width: 25px;
+    height: 25px;
+    transform-origin: center;
+    border: 2px solid #000;
+    border-radius: 50%;
+    vertical-align: -6px;
+    margin-right: 10px;
+    transition: background-color 150ms 200ms, transform 350ms cubic-bezier(.78,-1.22,.17,1.89); // custom ease effect for bouncy animation
+    // Now we'll create the "tick" using pseudo elements - those will be basically two lines that will be rotated to form the "tick"
+    &:before {
+      content: "";
+      width: 0px;
+      height: 2px;
+      border-radius: 2px; // so that the tick has nice rounded look
+      background: #000;
+      position: absolute;
+      transform: rotate(45deg);
+      top: 11px; // you'll need to experiment with placement depending on the dimensions you've chosen
+      left: 7px; // you'll need to experiment with placement depending on the dimensions you've chosen
+      transition: width 50ms ease 50ms;
+      transform-origin: 0% 0%;
+    }
+
+    &:after {
+      content: "";
+      width: 0;
+      height: 2px;
+      border-radius: 2px; // so that the tick has nice rounded look
+      background: #000;
+      position: absolute;
+      transform: rotate(305deg);
+      top: 14px; // you'll need to experiment with placement depending on the dimensions you've chosen
+      left: 8px; // you'll need to experiment with placement depending on the dimensions you've chosen
+      transition: width 50ms ease;
+      transform-origin: 0% 0%;
+    }
+  }
+  // Time to add some life to it
+  &:hover {
+    span {
+      &:before {
+        width: 5px;
+        transition: width 100ms ease;
+      }
+
+      &:after {
+        width: 10px;
+        transition: width 150ms ease 100ms;
+      }
+    }
+  }
+}
+
+input[type="checkbox"] {
+  display: none; // hide the system checkbox
+  // Let's add some effects after the checkbox is checked
+  &:checked {
+    + label {
+      span {
+        background-color: #9BAE0C;
+        transform: scale(1.25); // enlarge the box
+        &:after {
+          width: 10px;
+          background: #000;
+          transition: width 150ms ease 100ms; // enlarge the tick
+        }
+
+        &:before {
+          width: 5px;
+          background: #000;
+          transition: width 150ms ease 100ms; // enlarge the tick
+        }
+      }
+
+      &:hover { // copy the states for onMouseOver to avoid flickering
+        span {
+          background-color: #1790b5;
+          transform: scale(1.25); // enlarge the box
+          &:after {
+            width: 10px;
+            background: #000;
+            transition: width 150ms ease 100ms; // enlarge the tick
+          }
+
+          &:before {
+            width: 5px;
+            background: #000;
+            transition: width 150ms ease 100ms; // enlarge the tick
+          }
+        }
+      }
+    }
+  }
+}
+
+.disable{
+  color: grey!important;
+  cursor: default;
+}
+
+
+input[type="checkbox"].disableCheck {
+  display: none; // hide the system checkbox
+  // Let's add some effects after the checkbox is checked
+
+  &:checked {
+    + label {
+      span {
+        background-color: grey;
+        transform: scale(1) !important;
+
+        &:after {
+          width: 10px;
+          background: grey;
+        }
+
+        &:before {
+          width: 5px;
+          background: grey;
+        }
+      }
+
+      &:hover { // copy the states for onMouseOver to avoid flickering
+        span {
+          background-color: grey;
+          transform: scale(1)!important; // enlarge the box
+          &:after {
+            width: 10px;
+            background: grey;
+          }
+
+          &:before {
+            width: 5px;
+            background: grey;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+label.disable {
+  display: inline-block; // to make it easier to click
+  color: grey;
+  position: relative; // important
+  // Now we'll create the checkbox object
+  span {
+    display: inline-block;
+    position: relative;
+    background-color: grey;
+    width: 25px;
+    height: 25px;
+    transform-origin: center;
+    border: 2px solid darkgrey;
+    border-radius: 50%;
+    vertical-align: -6px;
+    margin-right: 10px;
+    transition: background-color 150ms 200ms, transform 350ms cubic-bezier(.78,-1.22,.17,1.89); // custom ease effect for bouncy animation
+    // Now we'll create the "tick" using pseudo elements - those will be basically two lines that will be rotated to form the "tick"
+    &:before {
+      content: "";
+      width: 0px;
+      height: 2px;
+      border-radius: 2px; // so that the tick has nice rounded look
+      background: grey;
+      position: absolute;
+      transform: rotate(45deg);
+      top: 11px; // you'll need to experiment with placement depending on the dimensions you've chosen
+      left: 7px; // you'll need to experiment with placement depending on the dimensions you've chosen
+      transition: width 50ms ease 50ms;
+      transform-origin: 0% 0%;
+    }
+
+    &:after {
+      content: "";
+      width: 0;
+      height: 2px;
+      border-radius: 2px; // so that the tick has nice rounded look
+      background: grey;
+      position: absolute;
+      transform: rotate(305deg);
+      top: 14px; // you'll need to experiment with placement depending on the dimensions you've chosen
+      left: 8px; // you'll need to experiment with placement depending on the dimensions you've chosen
+      transition: width 50ms ease;
+      transform-origin: 0% 0%;
+    }
+  }
+  // Time to add some life to it
+  &:hover {
+    span {
+      &:before {
+        width: 5px;
+        transition: width 100ms ease;
+      }
+
+      &:after {
+        width: 10px;
+        transition: width 150ms ease 100ms;
+      }
+    }
+  }
+}
+
+.volver {
+  background-color: #337ab7 !important;
+  border-color: #2e6da4 !important;
+  transition-duration: 0.1s !important;
+}
+
+.volver:hover {
+  background-color: #1e4c75 !important;
+}
+
+.inicio {
+  background-color: #5cb85c !important;
+  border-color: #4cae4c !important;
+  transition-duration: 0.1s !important;
+}
+
+.inicio:hover {
+  background-color: #428442 !important;
+}
+
+hr {
+  display: block;
+  position: relative;
+  padding: 0;
+  margin: 8px auto;
+  height: 0;
+  width: 100%;
+  max-height: 0;
+  font-size: 1px;
+  line-height: 0;
+  clear: both;
+  border: none;
+  border-top: 1px solid #aaaaaa;
+  border-bottom: 1px solid #ffffff;
+}
+
+hr.textopdf{
+  margin: 8px 0px;
+}
+
+#cargarPDF{
+  height: 30px;
+  padding-right: 100px;
+}
+
+.colNotasPreg {
+  min-width: calc(50vw - 290px);
+  overflow-x: auto;
+}
+
+.colNotasAsi {
+  min-width: calc(100vw - 325px);
+  overflow-x: auto;
+}
+
+.colNotasPreg.pdf {
+  min-width: 100px;
+  overflow-x: hidden;
+}
+
+.colNotasAsi.pdf {
+  min-width: 400px;
+  overflow-x: hidden;
+}
+
+.textopdf{
+  max-width: 600px;
+  
+}
+
+
+.btnpdf {
+  -moz-box-shadow: 0px 10px 14px -7px #337ab7;
+  -webkit-box-shadow: 0px 10px 14px -7px #337ab7;
+  box-shadow: 0px 10px 14px -7px #337ab7;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #4c91cd), color-stop(1, #337ab7));
+  background: -moz-linear-gradient(top, #4c91cd 5%, #337ab7 100%);
+  background: -webkit-linear-gradient(top, #4c91cd 5%, #337ab7 100%);
+  background: -o-linear-gradient(top, #4c91cd 5%, #337ab7 100%);
+  background: -ms-linear-gradient(top, #4c91cd 5%, #337ab7 100%);
+  background: linear-gradient(to bottom, #4c91cd 5%, #337ab7 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4c91cd', endColorstr='#337ab7',GradientType=0);
+  background-color: #337ab7;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 10px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #337ab7;
+}
+
+.btnpdf:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #337ab7), color-stop(1, #4c91cd));
+  background: -moz-linear-gradient(top, #337ab7 5%, #4c91cd 100%);
+  background: -webkit-linear-gradient(top, #337ab7 5%, #4c91cd 100%);
+  background: -o-linear-gradient(top, #337ab7 5%, #4c91cd 100%);
+  background: -ms-linear-gradient(top, #337ab7 5%, #4c91cd 100%);
+  background: linear-gradient(to bottom, #337ab7 5%, #4c91cd 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#337ab7', endColorstr='#4c91cd',GradientType=0);
+  background-color: #337ab7;
+}
+
+.btnpdf:active {
+  position: relative;
+  top: 1px;
+}
+
+#ocultar {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.5);
+  z-index:1;
+}
+
+.suspenso{
+  font-weight: bold;
+  color: red;
+}
+
+.transparente {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}

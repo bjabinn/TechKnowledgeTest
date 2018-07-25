@@ -1,0 +1,242 @@
+.loading {
+  position: fixed;
+  margin-top: 15%;
+  margin-right: 5%;
+}
+
+.espacio {
+  margin: 25px;
+}
+
+#Grafica {
+  min-width: 350px;
+  max-width: 350px;
+}
+
+#ocultar {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.5);
+  z-index: 1;
+}
+
+
+.Warning {
+  color: rgba(0,0,0,0.6);
+  text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
+}
+
+.wrapper {
+  text-align: center;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+
+h2{
+    text-align: center;
+}
+
+td, th {
+  padding: 3px !important;
+  font-size: 13px !important;
+}
+
+.form-control {
+  font-size: 13px !important;
+}
+
+.filtro {
+  max-width: 150px;
+}
+
+.filterable {
+  font-size: 13px !important;
+  margin-top: 15px;
+}
+.filterable .panel-heading .pull-right {
+    margin-top: -20px;
+}
+.filterable .filters input[disabled] {
+    background-color: transparent;
+    border: none;
+    cursor: auto;
+    box-shadow: none;
+    padding: 0;
+    height: auto;
+}
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]::-moz-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]:-ms-input-placeholder {
+    color: #333;
+}
+
+table *{
+  vertical-align: middle;
+  text-align: center;
+}
+
+
+.todo{
+  width: 100%!important;
+}
+
+.transparente {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  width: 60px;
+}
+
+img{
+  height:35px;
+}
+
+
+.btnpdf {
+  -moz-box-shadow: 0px 10px 14px -7px #337ab7;
+  -webkit-box-shadow: 0px 10px 14px -7px #337ab7;
+  box-shadow: 0px 10px 14px -7px #337ab7;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #4c91cd), color-stop(1, #337ab7));
+  background: -moz-linear-gradient(top, #4c91cd 5%, #337ab7 100%);
+  background: -webkit-linear-gradient(top, #4c91cd 5%, #337ab7 100%);
+  background: -o-linear-gradient(top, #4c91cd 5%, #337ab7 100%);
+  background: -ms-linear-gradient(top, #4c91cd 5%, #337ab7 100%);
+  background: linear-gradient(to bottom, #4c91cd 5%, #337ab7 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4c91cd', endColorstr='#337ab7',GradientType=0);
+  background-color: #337ab7;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 7px 25px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #337ab7;
+}
+
+.btnpdf:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #337ab7), color-stop(1, #4c91cd));
+  background: -moz-linear-gradient(top, #337ab7 5%, #4c91cd 100%);
+  background: -webkit-linear-gradient(top, #337ab7 5%, #4c91cd 100%);
+  background: -o-linear-gradient(top, #337ab7 5%, #4c91cd 100%);
+  background: -ms-linear-gradient(top, #337ab7 5%, #4c91cd 100%);
+  background: linear-gradient(to bottom, #337ab7 5%, #4c91cd 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#337ab7', endColorstr='#4c91cd',GradientType=0);
+  background-color: #337ab7;
+}
+
+.btnpdf:active {
+  position: relative;
+  top: 1px;
+}
+
+.btn-filter{
+  font-size: 13px;
+}
+
+.inicio {
+  font-size: 14px;
+}
+
+//Radio Button
+.radio {
+  font-size: 13px !important;
+  display: inline;
+  cursor: pointer;
+  user-select: none;
+  text-align: left;
+  padding-left: 20px;
+
+  & + .radio {
+    margin-top: 7px;
+  }
+
+  input {
+    display: none;
+
+    & + span {
+      padding-top: 3px;
+      display: inline;
+      position: relative;
+      padding-left: 20px;
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 4px;
+        left: 0px;
+        border-radius: 50%;
+        margin-right: 5px;
+        width: 16px;
+        height: 16px;
+        border: 1px solid #ccc;
+        background: #fff;
+      }
+
+      &:after {
+        content: '';
+        display: block;
+        width: 8px;
+        height: 8px;
+        background: #222;
+        position: absolute;
+        border-radius: 50%;
+        top: 8px;
+        left: 4px;
+        opacity: 0;
+        transform: scale(0,0);
+        transition: all .2s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+      }
+    }
+
+    &:checked + span:after {
+      opacity: 1;
+      transform: scale(1,1);
+    }
+  }
+}
+
+.inicio {
+  background-color: #337ab7 !important;
+  border-color: #2e6da4 !important;
+  transition-duration: 0.1s !important;
+}
+
+.inicio:hover {
+  background-color: #1e4c75 !important;
+}
+
+.cambiar {
+  background-color: #5cb85c !important;
+  border-color: #4cae4c !important;
+  transition-duration: 0.1s !important;
+}
+
+.cambiar:hover {
+  background-color: #428442 !important;
+}
+
+.fecha{
+  pointer-events: none;
+}

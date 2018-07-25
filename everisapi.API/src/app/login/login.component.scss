@@ -1,0 +1,42 @@
+
+.corregir {
+  margin-right: 5%;
+}
+
+.loginmodal-container {
+  margin-left: 65px;
+  margin-right: 65px;
+}
+
+body, html {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(#ffffff, #cbcbcb);
+}
+
+.card-container {
+  background-color: #F7F7F7;
+  /* just in case there no content*/
+  padding: 20px 25px 30px;
+  margin: 0 auto 25px;
+  /* shadows and rounded borders */
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 4px;
+  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+}
+
+.corporation {
+  max-width: 150px;
+}
+
+h1 {
+  text-align: center;
+}
+
+#titulo{
+  margin-top:40px;
+  font-size: 40pt;
+}

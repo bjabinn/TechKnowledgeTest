@@ -1,0 +1,80 @@
+
+<br> <br>
+<div class="corregir">
+  <div class="espacio">
+    <div *ngIf="(ErrorMessage != null && ProyectoSeleccionado == null )" class="alert alert-danger" id="danger">
+      <strong>{{ErrorMessage}}</strong>
+    </div>
+  </div>
+
+  <div *ngIf="MostrarInfo">
+
+    <div class="row" id="infopro">
+      <div class="col-xs-12 col-sm-3 col-md-3">
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 mt-2">
+        <select class="custom-select" *ngIf="ListaDeProyectos.length > 0" (change)="SeleccionDeProyecto($event.target.value)">
+          <option selected>- Seleccione un proyecto </option>
+          <option *ngFor="let proyecto of ListaDeProyectos; let i = index" value={{i}}>{{proyecto.nombre}}</option>
+        </select>
+
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 mt-2">
+
+        <span *ngIf="ListaDeProyectos.length == 0">
+          <app-loading></app-loading>
+        </span>
+
+        <div class="tituloContDisable" *ngIf="ListaDeProyectos.length > 0 && !existeRepetida">
+          <a>Continuar <br />Evaluaci&oacute;n</a>
+        </div>
+
+      <div class="tituloCont" *ngIf="ListaDeProyectos.length > 0 && existeRepetida" (click)="continuarEvaluacion()">
+        <a>Continuar <br />Evaluaci&oacute;n</a>
+      </div>
+    </div>
+
+        <div class="col-xs-12 col-sm-3 col-md-3 mt-2">
+        </div>
+
+      </div>
+    <br> <br>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-1"></div>
+      <div class="col-xs-12 col-sm-12 col-md-5">
+        <div class="titulo" (click)="showModal(content)">
+          <a>Nueva <br />Evaluaci&oacute;n</a>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-5">
+        <div class="titulo bajarmedia" (click)="EvaluacionesAnteriores()">
+          <a>Evaluaciones <br />Anteriores</a>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-1"></div>
+    </div>
+
+  </div>
+
+  <ng-template #content let-cl="close" let-di="dismiss">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Advertencia</h5> <button type="button" class="close" (click)="cl('Cerrar')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Ya existe una evaluación sin terminar</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="di('Continuar')">Continuar</button>
+        <button type="button" class="btn btn-primary" (click)="di('Nueva')">Nueva</button>
+        <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">Cancelar</button>
+      </div>
+    </div>
+  </ng-template>
+</div>

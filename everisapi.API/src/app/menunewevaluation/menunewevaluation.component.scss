@@ -1,0 +1,135 @@
+#infopro {
+  border: 2px solid #99AD00;
+  margin: 0 auto;
+  padding: 15px 15px;
+  text-align: left;
+  max-width: 1100px;
+  font-size: 16px;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+
+.corregir {
+  margin-right: 5%;
+}
+
+#barraespacio {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  padding: 15px;
+  padding-top: 5px;
+}
+
+h2 {
+  text-align: center;
+  display: inline-block!important;
+}
+
+.arrow {
+  display: block;
+  float: right;
+  margin-top: .25em;
+  border-color: transparent;
+  border-top-color: #D00;
+  border-style: solid;
+  border-width: .5em .31em 0;
+  width: 0;
+  height: 0;
+  position: relative;
+  line-height: 0;
+}
+
+.arrow-right {
+  border-width: .60em 0 .60em .5em;
+  border-top-color: transparent;
+  border-left-color: #090;
+}
+
+.inicio {
+  background-color: #337ab7 !important;
+  border-color: #2e6da4 !important;
+  transition-duration: 0.1s!important;
+}
+
+.inicio:hover {
+  background-color: #1e4c75 !important;
+}
+
+.finalizar {
+  background-color: #5cb85c !important;
+  border-color: #4cae4c !important;
+  transition-duration: 0.1s !important;
+}
+
+.finalizar:hover {
+  background-color: #428442 !important;
+}
+
+
+.progress-bar {
+  width: 0;
+  animation: progress 1.5s ease-in-out forwards;
+
+  .title {
+    opacity: 0;
+    animation: show 0.35s forwards ease-in-out 0.5s;
+  }
+}
+
+@keyframes progress {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.wrapper {
+  text-align: center;
+}
+
+.button {
+  position: absolute;
+  top: 50%;
+}
+
+@media only screen and (max-width:416px) {
+  #bajar {
+    margin: 10px;
+  }
+}
+
+.espacio {
+  margin: 25px;
+}
+@media only screen and (max-width: 575px) {
+  #bajar {
+    margin: 10px;
+  }
+}
+
+.progress-text {
+  color: #000;
+  padding-left: 5px;
+}
+
+.transparente {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}

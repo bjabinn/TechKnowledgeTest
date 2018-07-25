@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.corregir {
+  margin-right: 5%;
+}
+
+.titulo {
+  margin-left: 15%;
+  width: 310px;
+  height: 70px;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  color: #FFF;
+  text-align: center;
+  letter-spacing: 4px;
+  background: linear-gradient(50deg, #99AD00, #99AD01);
+  padding: 15px 20px;
+  transition: all .5s ease;
+  border-radius: 3px;
+  cursor: pointer;
+
+  a {
+    width: 310px;
+    height: 50px;
+    text-decoration: none;
+    color: #FFF;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
+.titulo:hover, .tituloCont:hover {
+  box-shadow: 0 20px 5px -10px rgba(#000, 0.4);
+  transform: translateY(10px);
+}
+
+#infopro {
+  border: 2px solid #99AD00;
+  margin: 0 auto;
+  padding: 20px 20px;
+  text-align: left;
+  max-width: 1100px;
+  border-radius: 5px;
+}
+
+
+.textstyle {
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 767px) {
+  .titulo {
+    margin-left: 28%;
+  }
+
+  .bajarmedia {
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 535px) {
+  .titulo {
+    margin-left: 28%;
+  }
+
+}
+
+@media only screen and (max-width: 500px) {
+  .titulo {
+    margin-left: 15%;
+  }
+
+}
+
+@media only screen and (max-width: 450px) {
+  .titulo {
+    margin-left: 10%;
+  }
+
+}
+
+@media only screen and (max-width: 575px) {
+  .tituloCont {
+    max-width: 300px;
+  }
+}
+
+.espacio {
+  margin: 25px;
+}
+
+.tituloCont {
+  min-width: 125px;
+  height: 60px;
+  font-size: 11pt;
+  font-family: 'Roboto', sans-serif;
+  color: #FFF;
+  text-align: center;
+  letter-spacing: 4px;
+  background: #347ab7;
+  padding: 10px 5px;
+  transition: all .5s ease;
+  border-radius: 3px;
+  cursor: pointer;
+
+  a {
+    text-decoration: none;
+    color: #FFF;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
+.tituloContDisable {
+  min-width: 125px;
+  height: 60px;
+  font-size: 11pt;
+  font-family: 'Roboto', sans-serif;
+  color: #FFF;
+  text-align: center;
+  letter-spacing: 4px;
+  background: rgba(52, 122, 183, 0.27);
+  padding: 10px 5px;
+  transition: all .5s ease;
+  border-radius: 3px;
+  cursor: not-allowed;
+
+  a {
+    text-decoration: none;
+    color: #FFF;
+    cursor: not-allowed;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}

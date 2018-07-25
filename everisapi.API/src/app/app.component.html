@@ -1,0 +1,46 @@
+<!--Ventana mas grande-->
+<div class="no-print" id='cssmenu' *ngIf="_router.url != '/login' && _router.url != '/' && ScreenWidth > 776">
+  <ul class="text-center">
+    <li class="active text-center" id="inicio"><a routerLink="/home">Inicio</a></li>
+    <li class="text-center titulo noSelect" [ngClass]="{'solo': NombreDeProyecto==null}">AgileMeter</li>
+    <li class="proyecto text-center noSelect" *ngIf="NombreDeProyecto != null">Proyecto: {{NombreDeProyecto}}</li>
+    <li class="text-center active float-right" id="cerrarsesion"><a routerLink="/login">Cerrar sesi&oacute;n</a></li>
+    <li class="usuario text-right float-right noSelect" *ngIf="NombreDeUsuario != null">Usuario: <b>{{NombreDeUsuario}}</b></li>
+  </ul>
+</div>
+
+<!--Ventana mediana-->
+<div class="no-print text-center" id='cssmenu' *ngIf="_router.url != '/login' && _router.url != '/' && ScreenWidth <= 776 && ScreenWidth > 537">
+
+  <ul class="text-center">
+    <li class="active text-center top2" id="inicio"><a routerLink="/home">Inicio</a></li>
+    <li class="text-center margen2" [ngClass]="{'solo': NombreDeProyecto==null}">
+
+      <p class="text-center titulo2 noSelect">AgileMeter</p>
+      <p>
+        <span class="proyecto2" *ngIf="NombreDeProyecto != null">Proyecto: {{NombreDeProyecto}} |</span>
+        <span class="usuario2 noSelect" *ngIf="NombreDeUsuario != null">Usuario: <b>{{NombreDeUsuario}}</b></span>
+      </p>
+
+    </li>
+    <li class="text-center active top2" id="cerrarsesion"><a routerLink="/login">Cerrar sesi&oacute;n</a></li>
+  </ul> 
+</div>
+
+<!--Ventana pequeña-->
+<div class="no-print text-center" id='cssmenu' *ngIf="_router.url != '/login' && _router.url != '/' && ScreenWidth <= 537">
+
+  <p class="text-center titulo3 noSelect">AgileMeter</p>
+  <p>
+    <span class="proyecto3" *ngIf="NombreDeProyecto != null">Proyecto: {{NombreDeProyecto}} |</span>
+    <span class="usuario3 noSelect" *ngIf="NombreDeUsuario != null">Usuario: <b>{{NombreDeUsuario}}</b></span>
+  </p>
+
+  <ul class="text-center">
+    <li class="active text-center" id="inicio"><a routerLink="/home">Inicio</a></li>
+    <li class="text-center active" id="cerrarsesion"><a routerLink="/login">Cerrar sesi&oacute;n</a></li>
+  </ul>
+</div>
+
+
+<router-outlet></router-outlet>

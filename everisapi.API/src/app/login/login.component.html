@@ -1,0 +1,55 @@
+<div class="corregir">
+  <div class="row">
+    <div class="col-md-3 col-lg-3 col-sm-3">
+    </div>
+    <div class="col-md-6 col-lg-6 col-sm-6">
+      <h1 id="titulo">AgileMeter</h1>
+    </div>
+    <div class="col-md-3 col-lg-3 col-sm-3">
+      <img class="corporation" src="assets/everis.png" />
+    </div>
+  </div>
+  <div class="row">
+    <div class='col-md-2 col-lg-3 col-sm-1'></div>
+    <div class='col-md-8 col-lg-6 col-sm-10'>
+      <div id="login-modal" class="container">
+        <div class="card-container">
+          <div *ngIf="ErrorMessage!=null" class="alert alert-danger" id="danger">
+            <strong>{{ErrorMessage}}</strong>
+          </div>
+          <div class="loginmodal-container">
+            <h2>Iniciar Sesión</h2>
+            <br>
+            <form>
+              <div class="input-group">
+                <input id="email" type="email" class="form-control" name="name" placeholder="Usuario" [(ngModel)]="nombreDeUsuario">
+              </div>
+              <br>
+              <div class="input-group">
+                <input id="password" type="password" class="form-control" name="password" placeholder="Contrase&ntilde;a" [(ngModel)]="passwordDeUsuario">
+              </div>
+              <br>
+              <input *ngIf="enviando" type="submit" name="login" class="btn btn-success disabled" value="Acceder">
+              <input *ngIf="!enviando" type="submit" name="login" class="btn btn-success" value="Acceder" (click)="SignUp()">
+
+              <div *ngIf="enviando">
+                <app-loading></app-loading>
+              </div>
+            </form>
+
+            <div class="login-help">
+              <br>
+              <input *ngIf="recuerdameOnOff()" type="checkbox" id="recuerdame" checked (click)="recuerdameChange()" />
+              <input *ngIf="!recuerdameOnOff()" type="checkbox" id="recuerdame" (click)="recuerdameChange()" />
+              <strong class="ml-1">Recuérdame</strong>
+              <br>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-2 col-lg-3 col-sm-1'></div>
+  </div>
+</div>
+
